@@ -7,8 +7,3 @@ Resources:
         Properties:
             ApplicationName: { Ref: r6trackerBackend }
             SolutionStackName: 64bit Amazon Linux 2017.03 v2.4.1 running Python 3.4
-    AppConfig:
-        Type: AWS::ElasticBeanstalk::ConfigurationTemplate
-        Properties:
-            ApplicationName: { Ref: r6trackerBackend }
-            EnvironmentId: { Ref: Environment }
