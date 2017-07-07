@@ -1,13 +1,13 @@
 AWSTemplateFormatVersion: 2010-09-09
 Resources:
-    r6tracker-backend:
+    r6trackerBackend:
         Type: AWS::ElasticBeanstalk::Application
-    environment:
+    Environment:
         Type: AWS::ElasticBeanstalk::Environment
         Properties:
             ApplicationName: { Ref: r6tracker-backend }
             SolutionStackName: Python 3.4 version 2.4.1
-    appconfig:
+    AppConfig:
         Type: AWS::ElasticBeanstalk::ConfigurationTemplate
         Properties:
             ApplicationName: { Ref: r6tracker-backend }
