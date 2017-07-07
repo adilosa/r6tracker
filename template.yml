@@ -5,10 +5,10 @@ Resources:
     Environment:
         Type: AWS::ElasticBeanstalk::Environment
         Properties:
-            ApplicationName: { Ref: r6tracker-backend }
+            ApplicationName: { Ref: r6trackerBackend }
             SolutionStackName: Python 3.4 version 2.4.1
     AppConfig:
         Type: AWS::ElasticBeanstalk::ConfigurationTemplate
         Properties:
-            ApplicationName: { Ref: r6tracker-backend }
-            EnvironmentId: { Ref: environment }
+            ApplicationName: { Ref: r6trackerBackend }
+            EnvironmentId: { Ref: Environment }
