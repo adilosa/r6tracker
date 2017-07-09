@@ -4,6 +4,12 @@ import itertools
 
 import requests
 import boto3
+from flask import Flask
+
+from scheduled import Scheduled
+
+
+application = Flask(__name__)
 
 
 def group(iterable, n):
@@ -65,10 +71,14 @@ def store_connections(connections):
             )
 
 
+def update_online_players():
+    store_connections(online_players(profile_ids(), login_ticket()))
+
+
 if __name__ == "__main__":
-    start = time.time()
-    while True:
-        print("Looking for online players...")
-        store_connections(online_players(profile_ids(), login_ticket()))
-        time.sleep(360.0 - ((time.time() - start) % 60.0))
+    task = Scheduled(360, update_online_players)
+    task.start()
+    application.run()
+    task.stop()
+
 
