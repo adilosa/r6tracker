@@ -12,6 +12,10 @@ Resources:
                 Namespace: aws:autoscaling:launchconfiguration
                 OptionName: InstanceType
                 Value: t2.micro
+              -
+                Namespace: aws:autoscaling:launchconfiguration
+                OptionName: IamInstanceProfile
+                Value: "aws-elasticbeanstalk-ec2-role"
             Tier:
                 Name: "Worker"
                 Type: "SQS/HTTP"

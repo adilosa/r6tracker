@@ -74,6 +74,11 @@ def update_online_players():
     store_connections(online_players(profile_ids(), login_ticket()))
 
 
+@application.route("/")
+def main():
+    return "I'm online!"
+
+
 if __name__ == "__main__":
     application.run(port=80)
 
