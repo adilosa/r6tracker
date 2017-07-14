@@ -6,8 +6,6 @@ import requests
 import boto3
 from flask import Flask
 
-from scheduled import Scheduled
-
 
 application = Flask(__name__)
 
@@ -71,14 +69,12 @@ def store_connections(connections):
             )
 
 
+@application.route("/update_online_players")
 def update_online_players():
     store_connections(online_players(profile_ids(), login_ticket()))
 
 
 if __name__ == "__main__":
-    task = Scheduled(360, update_online_players)
-    task.start()
-    application.run()
-    task.stop()
+    application.run(port=80)
 
 
