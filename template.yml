@@ -2,16 +2,6 @@ AWSTemplateFormatVersion: 2010-09-09
 Resources:
     r6trackerBackend:
         Type: AWS::ElasticBeanstalk::Application
-    Environment:
-        Type: AWS::ElasticBeanstalk::Environment
-        Properties:
-            ApplicationName: { Ref: r6trackerBackend }
-            SolutionStackName: 64bit Amazon Linux 2017.03 v2.4.1 running Python 3.4
-            OptionSettings:
-              -
-                Namespace: aws:autoscaling:launchconfiguration
-                OptionName: InstanceType
-                Value: t2.micro
     WorkerEnvironment:
         Type: AWS::ElasticBeanstalk::Environment
         Properties:
