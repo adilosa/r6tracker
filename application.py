@@ -51,10 +51,10 @@ def online_players(ids, ticket):
             connection for connection in resp.json()['connections']
             if "5172a557-50b5-4665-b7db-e3f2e8c5041d" not in connection['spaceIds']
         ]
-        print("Found {} of those players online".format(len(online)))
         num_online += len(online)
         for connection in online:
             yield connection
+    print("Found {} players online".format(num_online))
 
 
 def store_connections(connections):
@@ -71,8 +71,10 @@ def store_connections(connections):
 
 @application.route("/update_online_players", methods=['POST'])
 def update_online_players():
+    print("Updating online players...")
     store_connections(online_players(profile_ids(), login_ticket()))
-    return "Done"
+    print("Finished updating online players.")
+    return "Message procesed", 200
 
 
 @application.route("/")
