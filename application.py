@@ -24,7 +24,7 @@ def login_ticket():
 
 
 def profile_ids():
-    table = boto3.resource('dynamodb').Table('siegestats-profiles')
+    table = boto3.resource('dynamodb', region_name='us-west-2').Table('siegestats-profiles')
     resp = table.scan()
     for item in resp['Items']:
         yield item['profileId']
@@ -58,7 +58,7 @@ def online_players(ids, ticket):
 
 
 def store_connections(connections):
-    with boto3.resource('dynamodb').Table('siegestats-profiles').batch_writer() as batch:
+    with boto3.resource('dynamodb', region_name='us-west-2').Table('siegestats-profiles').batch_writer() as batch:
         for connection in connections:
             batch.put_item(
                 Item={
