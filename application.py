@@ -72,6 +72,7 @@ def store_connections(connections):
 @application.route("/update_online_players", methods=['POST'])
 def update_online_players():
     store_connections(online_players(profile_ids(), login_ticket()))
+    return "Done"
 
 
 @application.route("/")
