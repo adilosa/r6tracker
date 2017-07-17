@@ -2,7 +2,7 @@ import datetime
 import time
 import itertools
 
-import requests
+import grequests
 import boto3
 from flask import Flask
 
@@ -24,37 +24,35 @@ def login_ticket():
 
 
 def profile_ids():
-    table = boto3.resource('dynamodb', region_name='us-west-2').Table('siegestats-profiles')
-    resp = table.scan()
-    for item in resp['Items']:
-        yield item['profileId']
-    while 'LastEvalutatedKey' in resp:
-        resp = table.scan(ExclusiveStartKey=resp['LastEvaluatedKey'])
-        for item in resp['Items']:
-            yield item['profileId']
+    pages = boto3.client('dynamodb', region_name='us-west-2').get_paginator('scan').paginate(TableName='siegestats-profiles')
+    for page in pages:
+        for item in page['Items']:
+            yield item['profileId']['S']
 
 
 def online_players(ids, ticket):
     num_online = 0
-    for chunk in group(ids, 50):
-        resp = requests.get(
-            "https://public-ubiservices.ubi.com:443/v1/profiles/connections?offset=0&limit=50&profileIds=" + ','.join(chunk),
-            headers={
-                "Authorization": "Ubi_v1 t=" + ticket,
-                "Ubi-AppId": "39baebad-39e5-4552-8c25-2c9b919064e2"
-            }
-        )
+    total = 0
 
-        resp.raise_for_status()
-
-        online = [
-            connection for connection in resp.json()['connections']
-            if "5172a557-50b5-4665-b7db-e3f2e8c5041d" not in connection['spaceIds']
-        ]
-        num_online += len(online)
-        for connection in online:
+    resps = grequests.imap(
+        map(
+            lambda chunk: grequests.get(
+                "https://public-ubiservices.ubi.com:443/v1/profiles/connections?offset=0&limit=50&profileIds=" + ','.join(chunk),
+                headers={ "Authorization": "Ubi_v1 t=" + ticket, "Ubi-AppId": "39baebad-39e5-4552-8c25-2c9b919064e2" }
+            ), group(ids, 50)
+        ), size=50, exception_handler=lambda r, e: print(e)
+    )
+    for resp in resps:
+        if not resp.status_code == 200:
+            print(resp.status_code, resp.text)
+            continue
+        for connection in resp.json()['connections']:
+            total += 1
+            if "5172a557-50b5-4665-b7db-e3f2e8c5041d" not in connection['spaceIds']:
+                continue
+            num_online += 1
             yield connection
-    print("Found {} players online".format(num_online))
+    print("Found {} of about {} players online".format(num_online, total))
 
 
 def store_connections(connections):
