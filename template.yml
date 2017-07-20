@@ -16,6 +16,18 @@ Resources:
                 Namespace: aws:autoscaling:launchconfiguration
                 OptionName: IamInstanceProfile
                 Value: "aws-elasticbeanstalk-ec2-role"
+              -
+                Namespace: aws:elasticbeanstalk:sqsd
+                OptionName: InactivityTimeout
+                Value: 3600
+              -
+                Namespace: aws:elasticbeanstalk:sqsd
+                OptionName: VisibilityTimeout
+                Value: 3600
+              -
+                Namespace: aws:elasticbeanstalk:sqsd
+                OptionName: MaxRetries
+                Value: 1
             Tier:
                 Name: "Worker"
                 Type: "SQS/HTTP"
