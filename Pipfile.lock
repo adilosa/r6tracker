@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "5f235c83fe9c73bfc76c31be4b42473926d350fef756cc358f76162ef4b2302e"
+            "sha256": "036f7038dfaac3442835b231f1e5c3a95774b61be1891526922ee16314850a3c"
         },
         "requires": {},
         "sources": [
@@ -12,13 +12,29 @@
         ]
     },
     "default": {
+        "Flask": {
+            "hash": "sha256:0749df235e3ff61ac108f69ac178c9770caeaccad2509cb762ce1f65570a8856",
+            "version": "==0.12.2"
+        },
+        "Jinja2": {
+            "hash": "sha256:2231bace0dfd8d2bf1e5d7e41239c06c9e0ded46e70cc1094a0aa64b0afeb054",
+            "version": "==2.9.6"
+        },
+        "MarkupSafe": {
+            "hash": "sha256:a6be69091dac236ea9c6bc7d012beab42010fa914c459791d627dad4910eb665",
+            "version": "==1.0"
+        },
+        "Werkzeug": {
+            "hash": "sha256:e8549c143af3ce6559699a01e26fa4174f4c591dbee0a499f3cd4c3781cdec3d",
+            "version": "==0.12.2"
+        },
         "boto3": {
             "hash": "sha256:5050c29353fec97301116386f469fa5858ccf47201623b53cf9f74e603bda52f",
             "version": "==1.4.4"
         },
         "botocore": {
-            "hash": "sha256:10dfb221c3796d45c81503fa79ba5ad9091c42d2480ad3fe26409443454c5500",
-            "version": "==1.5.80"
+            "hash": "sha256:5108a94426ad17e4a6050a20af8b38573534b6e2279767b0c96ce77ddf7dc2a5",
+            "version": "==1.5.86"
         },
         "certifi": {
             "hash": "sha256:f4318671072f030a33c7ca6acaef720ddd50ff124d1388e50c1bda4cbd6d7010",
@@ -28,21 +44,41 @@
             "hash": "sha256:fc323ffcaeaed0e0a02bf4d117757b98aed530d9ed4531e3e15460124c106691",
             "version": "==3.0.4"
         },
+        "click": {
+            "hash": "sha256:29f99fc6125fbc931b758dc053b3114e55c77a6e4c6c3a2674a2dc986016381d",
+            "version": "==6.7"
+        },
         "docutils": {
             "hash": "sha256:cb3ebcb09242804f84bdbf0b26504077a054da6772c6f4d625f335cc53ebf94d",
             "version": "==0.13.1"
         },
+        "gevent": {
+            "hash": "sha256:833bebdc36bfeeedefc200ca9aee9b8eddd80f56b63ca1e886e18b97b1240edd",
+            "version": "==1.2.2"
+        },
+        "greenlet": {
+            "hash": "sha256:e4c99c6010a5d153d481fdaf63b8a0782825c0721506d880403a3b9b82ae347e",
+            "version": "==0.4.12"
+        },
+        "grequests": {
+            "hash": "sha256:0f41c4eee83bab39f5543af49665c08681637a0562a5704a3f7b2e4a996531c9",
+            "version": "==0.3.0"
+        },
         "idna": {
             "hash": "sha256:cc19709fd6d0cbfed39ea875d29ba6d4e22c0cebc510a76d6302a28385e8bb70",
             "version": "==2.5"
+        },
+        "itsdangerous": {
+            "hash": "sha256:cbb3fcf8d3e33df861709ecaf89d9e6629cff0a217bc2848f1b41cd30d360519",
+            "version": "==0.24"
         },
         "jmespath": {
             "hash": "sha256:f11b4461f425740a1d908e9a3f7365c3d2e569f6ca68a2ff8bc5bcd9676edd63",
             "version": "==0.9.3"
         },
         "python-dateutil": {
-            "hash": "sha256:537bf2a8f8ce6f6862ad705cd68f9e405c0b5db014aa40fa29eab4335d4b1716",
-            "version": "==2.6.0"
+            "hash": "sha256:95511bae634d69bc7329ba55e646499a842bc4ec342ad54a8cdb65645a0aad3c",
+            "version": "==2.6.1"
         },
         "requests": {
             "hash": "sha256:6afd3371c1f4c1970497cdcace5c5ecbbe58267bf05ca1abd93d99d170803ab7",
@@ -51,6 +87,10 @@
         "s3transfer": {
             "hash": "sha256:bc52f38637f37572ae180c08a2dd87a4825b46713797633aab6e1a42d6b2b8ff",
             "version": "==0.1.10"
+        },
+        "schedule": {
+            "hash": "sha256:09e441ad7af291105934f2ff4a10d42b1a01be629e1be6f99da56da315133977",
+            "version": "==0.4.3"
         },
         "six": {
             "hash": "sha256:0ff78c403d9bccf5a425a6d31a12aa6b47f1c21ca4dc2573a7e2f32a97335eb1",
