@@ -41,7 +41,7 @@ def online_players(ids, ticket):
     futures = map(
         lambda chunk: session.get(
             "https://public-ubiservices.ubi.com:443/v1/profiles/connections?offset=0&limit=50&profileIds=" + ','.join(chunk),
-            headers={ "Authorization": "Ubi_v1 t=" + ticket, "Ubi-AppId": "39baebad-39e5-4552-8c25-2c9b919064e2" }
+            headers={"Authorization": "Ubi_v1 t=" + ticket, "Ubi-AppId": "39baebad-39e5-4552-8c25-2c9b919064e2"}
         ), group(ids, 50)
     )
     for future in as_completed(futures):
@@ -59,7 +59,7 @@ def online_players(ids, ticket):
 
 
 def store_connections(connections):
-    with boto3.resource('dynamodb', region_name='us-west-2').Table('siegestats-profiles').batch_writer() as batch:
+    with boto3.resource('dynamodb', region_name='us-west-2').Table('siegestats-profiles').batch_writer(overwrite_by_pkeys=["profileId"]) as batch:
         for connection in connections:
             batch.put_item(
                 Item={
