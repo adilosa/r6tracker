@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "036f7038dfaac3442835b231f1e5c3a95774b61be1891526922ee16314850a3c"
+            "sha256": "a7551fdc108958ebe75d11043b370d4eb10d7fc53334072610e98423dc95af2d"
         },
         "requires": {},
         "sources": [
@@ -53,7 +53,7 @@
             "version": "==0.13.1"
         },
         "gevent": {
-            "hash": "sha256:833bebdc36bfeeedefc200ca9aee9b8eddd80f56b63ca1e886e18b97b1240edd",
+            "hash": "sha256:0901975628790e8a57fc92bb7062e5b856edea48c8de9caf36cfda14eae07329",
             "version": "==1.2.2"
         },
         "greenlet": {

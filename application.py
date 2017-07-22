@@ -9,6 +9,9 @@ from flask import Flask
 
 application = Flask(__name__)
 
+application.config.from_object('config')
+application.config.from_pyfile('flask.cfg', silent=True)
+
 
 def group(iterable, n):
     it = iter(iterable)
@@ -81,6 +84,6 @@ def main():
 
 
 if __name__ == "__main__":
-    application.run(port=80)
+    application.run()
 
 
