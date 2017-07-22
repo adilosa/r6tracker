@@ -2,7 +2,8 @@ import datetime
 import time
 import itertools
 
-import grequests
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from requests_futures.sessions import FuturesSession
 import boto3
 from flask import Flask
 
@@ -36,16 +37,15 @@ def profile_ids():
 def online_players(ids, ticket):
     num_online = 0
     total = 0
-
-    resps = grequests.imap(
-        map(
-            lambda chunk: grequests.get(
-                "https://public-ubiservices.ubi.com:443/v1/profiles/connections?offset=0&limit=50&profileIds=" + ','.join(chunk),
-                headers={ "Authorization": "Ubi_v1 t=" + ticket, "Ubi-AppId": "39baebad-39e5-4552-8c25-2c9b919064e2" }
-            ), group(ids, 50)
-        ), size=50, exception_handler=lambda r, e: print(e)
+    session = FuturesSession(max_workers=50)
+    futures = map(
+        lambda chunk: session.get(
+            "https://public-ubiservices.ubi.com:443/v1/profiles/connections?offset=0&limit=50&profileIds=" + ','.join(chunk),
+            headers={ "Authorization": "Ubi_v1 t=" + ticket, "Ubi-AppId": "39baebad-39e5-4552-8c25-2c9b919064e2" }
+        ), group(ids, 50)
     )
-    for resp in resps:
+    for future in as_completed(futures):
+        resp = future.result()
         if not resp.status_code == 200:
             print(resp.status_code, resp.text)
             continue
