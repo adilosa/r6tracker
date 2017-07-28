@@ -2,4 +2,4 @@ version: 1
 cron:
  - name: "update_online_players"
    url: "/update_online_players"
-   schedule: "0 * * * *"
+   schedule: "*/20 * * * *"
