@@ -49,8 +49,8 @@ def online_players(ids, ticket):
         if not resp.status_code == 200:
             print(resp.status_code, resp.text)
             continue
+        total += 50
         for connection in resp.json()['connections']:
-            total += 1
             if "5172a557-50b5-4665-b7db-e3f2e8c5041d" not in connection['spaceIds']:
                 continue
             num_online += 1
