@@ -48,7 +48,7 @@ Resources:
             ActionMode: CREATE_UPDATE
             Capabilities: CAPABILITY_IAM
             RoleArn: !Sub '${CloudFormationRole.Arn}'
-            StackName: 'r6tracker-Stack'
+            StackName: 'r6tracker-DeployStack'
             TemplatePath: 'Zip::pipeline.yml'
             ParameterOverrides: !Sub '{"GitHubUserName": "${GitHubUserName}", "GitHubOAuthToken": "${GitHubOAuthToken}"}'
           InputArtifacts:
@@ -66,7 +66,7 @@ Resources:
             ActionMode: CREATE_UPDATE
             Capabilities: CAPABILITY_IAM
             RoleArn: !Sub '${CloudFormationRole.Arn}'
-            StackName: 'r6tracker'
+            StackName: 'r6tracker-Stack'
             TemplatePath: 'Zip::application.yml'
           InputArtifacts:
           - Name: Zip
