@@ -16,7 +16,7 @@ Resources:
       ArtifactStore:
         Type: S3
         Location: !Ref ArtifactsBucket
-      Name: 'r6tracker deployment'
+      Name: 'r6tracker'
       RestartExecutionOnUpdate: true
       RoleArn: !Sub '${PipelineRole.Arn}'
       Stages:
@@ -48,7 +48,7 @@ Resources:
             ActionMode: CREATE_UPDATE
             Capabilities: CAPABILITY_IAM
             RoleArn: !Sub '${CloudFormationRole.Arn}'
-            StackName: 'r6tracker-pipeline'
+            StackName: 'r6tracker-Stack'
             TemplatePath: 'Zip::pipeline.yml'
             ParameterOverrides: !Sub '{"GitHubUserName": "${GitHubUserName}", "GitHubOAuthToken": "${GitHubOAuthToken}"}'
           InputArtifacts:
