@@ -50,6 +50,7 @@ Resources:
             RoleArn: !Sub '${CloudFormationRole.Arn}'
             StackName: 'r6tracker-DeployStack'
             TemplatePath: 'Zip::pipeline.yml'
+            TemplateConfiguration: 'Zip::template-config.json'
             ParameterOverrides: !Sub '{"GitHubUserName": "${GitHubUserName}", "GitHubOAuthToken": "${GitHubOAuthToken}"}'
           InputArtifacts:
           - Name: Zip
