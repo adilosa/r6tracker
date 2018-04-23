@@ -56,7 +56,7 @@ Resources:
           RunOrder: 1
       - Name: DeployApplication
         Actions:
-        - Name: DeployApplicationAction
+        - Name: DeployApplicationStackAction
           ActionTypeId:
             Category: Deploy
             Owner: AWS
@@ -68,9 +68,22 @@ Resources:
             RoleArn: !Sub '${CloudFormationRole.Arn}'
             StackName: 'r6tracker-Stack'
             TemplatePath: 'Zip::application.yml'
+            TemplateConfiguration: 'Zip::template-config.json'
           InputArtifacts:
           - Name: Zip
           RunOrder: 1
+        - Name: DeployApplicationAction
+          ActionTypeId:
+            Category: Deploy
+            Owner: AWS
+            Provider: ElasticBeanstalk
+            Version: 1
+          Configuration:
+            ApplicationName: !ImportValue r6trackercom-Stack-r6trackercom-ApplicationID
+            EnvironmentName: !Ref EnvironmentName
+          InputArtifacts:
+          - Name: Zip
+          RunOrder: 2
   PipelineRole:
     Type: 'AWS::IAM::Role'
     Properties:

@@ -1,11 +1,19 @@
 AWSTemplateFormatVersion : '2010-09-09'
-Transform: AWS::Serverless-2016-10-31
 Resources:
-  PlayersIngestion:
-    Type: AWS::Serverless::Function
+  Environment:
+    Type: AWS::ElasticBeanstalk::Environment
     Properties:
-      Runtime: python3.6
-      Handler: players.lambda_handler
-      CodeUri: lambda.zip
-      Timeout: 300
-      MemorySize: 256
+      ApplicationName: !ImportValue r6trackercom-Stack-r6trackercom-ApplicationID
+      SolutionStackName: 64bit Amazon Linux 2017.09 v2.6.6 running Python 3.6
+      OptionSettings:
+        -
+          Namespace: aws:autoscaling:launchconfiguration
+          OptionName: InstanceType
+          Value: c5.xlarge
+        -
+          Namespace: aws:autoscaling:launchconfiguration
+          OptionName: IamInstanceProfile
+          Value: "aws-elasticbeanstalk-ec2-role"
+      Tier:
+        Name: "Worker"
+        Type: "SQS/HTTP"
