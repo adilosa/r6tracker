@@ -48,8 +48,8 @@ Resources:
             ActionMode: CREATE_UPDATE
             Capabilities: CAPABILITY_IAM
             RoleArn: !Sub '${CloudFormationRole.Arn}'
-            StackName: 'r6tracker-DeployStack'
-            TemplatePath: 'Zip::pipeline.yml'
+            StackName: 'r6tracker'
+            TemplatePath: 'Zip::template.yml'
             ParameterOverrides: !Sub '{"GitHubUserName": "${GitHubUserName}", "GitHubOAuthToken": "${GitHubOAuthToken}"}'
           InputArtifacts:
           - Name: Zip
@@ -63,7 +63,7 @@ Resources:
             Provider: ElasticBeanstalk
             Version: 1
           Configuration:
-            ApplicationName: !ImportValue r6trackercom-Stack-r6trackercom-ApplicationID
+            ApplicationName: !ImportValue r6trackercom-ApplicationID
             EnvironmentName: !Ref Environment
           InputArtifacts:
           - Name: Zip
@@ -99,7 +99,7 @@ Resources:
   Environment:
     Type: AWS::ElasticBeanstalk::Environment
     Properties:
-      ApplicationName: !ImportValue r6trackercom-Stack-r6trackercom-ApplicationID
+      ApplicationName: !ImportValue r6trackercom-ApplicationID
       SolutionStackName: 64bit Amazon Linux 2017.09 v2.6.6 running Python 3.6
       OptionSettings:
         -
