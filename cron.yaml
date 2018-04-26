@@ -1,8 +1,8 @@
 version: 1
 cron:
  - name: "update_players"
-   url: "/update_players"
+   url: "/players"
    schedule: "*/5 * * * *"
  - name: "update_profiles"
-   url: "/update_profiles"
+   url: "/profiles"
    schedule: "*/5 * * * *"
