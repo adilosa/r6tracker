@@ -116,6 +116,11 @@ Resources:
       - 'arn:aws:iam::aws:policy/AWSElasticBeanstalkMulticontainerDocker'
       - 'arn:aws:iam::aws:policy/AWSElasticBeanstalkWorkerTier'
       - 'arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess'
+  R6WorkerInstanceProfile:
+    Type: 'AWS::IAM::InstanceProfile'
+    Properties:
+      Roles:
+        - !Ref R6WorkerRole
   Environment:
     Type: AWS::ElasticBeanstalk::Environment
     Properties:
@@ -129,7 +134,7 @@ Resources:
         -
           Namespace: aws:autoscaling:launchconfiguration
           OptionName: IamInstanceProfile
-          Value: "aws-elasticbeanstalk-ec2-role"
+          Value: !Ref R6WorkerInstanceProfile
       Tier:
         Name: "Worker"
         Type: "SQS/HTTP"
