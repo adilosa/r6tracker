@@ -96,6 +96,26 @@ Resources:
           - 'sts:AssumeRole'
       ManagedPolicyArns:
       - 'arn:aws:iam::aws:policy/AdministratorAccess'
+  R6WorkerRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - 'ec2.amazonaws.com'
+          Action:
+          - 'sts:AssumeRole'
+      ManagedPolicyArns:
+      - 'arn:aws:iam::aws:policy/AmazonS3FullAccess'
+      - 'arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess'
+      - 'arn:aws:iam::aws:policy/AWSElasticBeanstalkWebTier'
+      - 'arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess'
+      - 'arn:aws:iam::aws:policy/AWSElasticBeanstalkMulticontainerDocker'
+      - 'arn:aws:iam::aws:policy/AWSElasticBeanstalkWorkerTier'
+      - 'arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess'
   Environment:
     Type: AWS::ElasticBeanstalk::Environment
     Properties:
