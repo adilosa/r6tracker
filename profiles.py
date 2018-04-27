@@ -40,7 +40,7 @@ async def _profiles():
         for profiles in chunks(
             [
                 profile['profileId']
-                for profile in json.loads(s3file('seigestats', sys.argv[1]))
+                for profile in json.loads(s3file('seigestats', 'players_online.json'))
             ], 50
         )
     ]
