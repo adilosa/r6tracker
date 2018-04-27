@@ -135,6 +135,10 @@ Resources:
           Namespace: aws:autoscaling:launchconfiguration
           OptionName: IamInstanceProfile
           Value: !Ref R6WorkerInstanceProfile
+        -
+          Namespace: aws:elasticbeanstalk:environment
+          OptionName: EnvironmentType
+          Value: SingleInstance
       Tier:
         Name: "Worker"
         Type: "SQS/HTTP"
