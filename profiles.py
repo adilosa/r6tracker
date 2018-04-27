@@ -62,7 +62,7 @@ async def _profiles():
     connection = pymysql.connect(
         host='r6tracker.c26zdjdyszm5.us-east-1.rds.amazonaws.com',
         user='r6tracker',
-        password=boto3.client('ssm').get_parameter(Name='r6tracker-db-pw', WithDecryption=True)['Parameter']['Value'],
+        password=boto3.client('ssm', region_name='us-east-1').get_parameter(Name='r6tracker-db-pw', WithDecryption=True)['Parameter']['Value'],
         db='r6tracker',
         charset='utf8mb4',
         cursorclass=pymysql.cursors.DictCursor
