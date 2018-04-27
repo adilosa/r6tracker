@@ -94,5 +94,5 @@ async def _players():
 
 
 def players():
-    loop = asyncio.get_event_loop()
+    loop = asyncio.noew_event_loop()
     loop.run_until_complete(_players())
